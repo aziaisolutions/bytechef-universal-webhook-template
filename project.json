@@ -1,0 +1,1 @@
+{"name":"Universal Webhook Ingestion & Dispatch Bridge","description":"Automated webhook ingestion bridge that receives structured lead payloads, validates schema parameters, and dispatches formatted data to downstream CRM or notification endpoints."}
