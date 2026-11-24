@@ -1,18 +1,23 @@
 # Universal Webhook Ingestion & Dispatch Bridge (ByteChef Template)
 
-A production-ready, platform-agnostic workflow template for ByteChef designed for decoupled lead capture and downstream dispatch.
+A production-ready, platform-agnostic ByteChef project template for decoupled lead capture and downstream HTTP dispatch.
+
+## How to Import in ByteChef
+1. Download the `.zip` project archive from this repository.
+2. Open your ByteChef dashboard and go to **Projects**.
+3. Click the dropdown arrow next to **New Project** and select **Import Project**.
+4. Upload the `.zip` archive — the project and workflow will load directly onto the canvas.
 
 ## Architecture & Logic
-- **Webhook Trigger (Lead Ingestion):** Configured with `autoRespondWithHTTP200` to immediately acknowledge inbound requests, preventing client-side timeouts.
-- **HTTP Client (Downstream Dispatch):** Standardizes incoming payloads (`name`, `email`, `company`, `intent`) and dispatches structured JSON to any external CRM, database, or API endpoint.
-- **Decoupled Architecture:** Eliminates hardcoded credentials and proprietary CRM lock-in, enabling seamless integration across any downstream service.
+- **Webhook Trigger (`autoRespondWithHTTP200`):** Immediately acknowledges inbound POST payloads to prevent upstream client timeouts.
+- **HTTP Client (Downstream Dispatch):** Maps incoming fields (`name`, `email`, `company`, `intent`) into a standardized JSON event (`lead_received`) and dispatches it to any external CRM, database, or webhook endpoint.
+- **Decoupled Design:** Eliminates hardcoded credentials and proprietary CRM lock-in.
 
-## Schema & Payload Format
+## Expected Webhook Payload
 ```json
 {
-  "event": "lead_received",
-  "name": "${trigger_1.body.name}",
-  "email": "${trigger_1.body.email}",
-  "company": "${trigger_1.body.company}",
-  "intent": "${trigger_1.body.intent}"
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "company": "Acme Corp",
+  "intent": "demo"
 }
